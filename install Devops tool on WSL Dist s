@@ -1,0 +1,118 @@
+
+#################################################################################################################
+## on Alpine
+
+apk update
+apk upgrade
+
+
+apk add ansible
+apk add terraform
+apk add git
+apk add docker docker-compose   # 400mb 
+
+apk add py3-kubernetes
+
+   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+#################################################################################################################
+## on ubuntu
+
+$ sudo apt-add-repository ppa:ansible/ansible
+  sudo apt install -y ansible
+
+
+$ sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  sudo echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  sudo apt update
+  sudo apt install terraform
+  terraform -v
+
+         # dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem
+
+         sudo dpkg --configure -a
+         sudo apt update
+
+         sudo rm /var/lib/dpkg/lock-frontend
+         sudo rm /var/lib/dpkg/lock
+
+         sudo apt install -f
+
+         sudo apt install terraform -y
+
+         sudo dpkg --configure -a                                                          
+            dpkg: error: parsing file '/var/lib/dpkg/updates/0004' near line 0:
+            newline in field name '#padding' 
+        
+           sudo rm -rf /var/lib/dpkg/updates/*   # deletes broken updates fıles
+           sudo dpkg --configure -a
+           sudo apt install -f
+           sudo apt update
+             # sudo apt install terraform -y  ıf errros keep on
+            
+            sudo apt update
+            sudo apt install -y gnupg software-properties-common curl
+            sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+            sudo echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+            sudo apt update
+            sudo apt install -y terraform   # ok
+
+
+$ sudo sudo apt update
+   sudo apt install -y ca-certificates curl gnupg lsb-release
+  
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg         
+            
+    sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+                                       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    sudo apt update
+    sudo apt install -y docker docker-compose
+         
+      sudo service docker start
+      docker --version
+      sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      sudo chmod +x /usr/local/bin/docker-compose
+      docker-compose --version
+      sudo usermod -aG docker $USER
+
+
+$ kubernetes       
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+
+$ helm
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+helm version
+
+
+
+           
+           
+################################################################################################################
+## ınstallıng  K9S
+
+$ sudo curl -sS https://webinstall.dev/k9s | bash
+
+
+
+################################################################################################################
+## minikube  K3s
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+minikube version
+
+################################################################################################################
+
+
+################################################################################################################
+
+
+################################################################################################################

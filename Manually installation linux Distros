@@ -1,0 +1,100 @@
+curl -o alpine-rootfs.tar.gz https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/       
+                                            alpine-minirootfs-3.18.4-x86_64.tar.gz
+                                            alpine-minirootfs-3.21.0-x86_64.tar.gz 
+
+https://github.com/wsldl-pg/CentWSL/releases/download/8.1.1911.1/CentOS8.zip
+
+                              https://partner-images.canonical.com/oci/
+
+curl -o ubuntu-rootfs.tar.gz https://partner-images.canonical.com/oci/ubuntu-minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64-root.tar.gz
+                              ubuntu-plucky-oci-amd64-root.tar.gz
+
+
+
+mkdir E:\WSLs\Ubuntu-Copy
+
+wsl --import Ubuntu-Copy E:\WSLs\Ubuntu-Copy .\ubuntu-rootfs.tar.gz
+wsl --import Ubuntu-Copy E:\WSLs\Ubuntu-Copy D:\backups\ubuntu-rootfs.tar.gz
+
+wsl -l -v
+
+wsl -d Ubuntu-Copy
+
+
+adduser yourusername
+
+wsl.exe -d Ubuntu-Copy config --default-user yourusername
+
+--> Sample -*-*-
+PS C:\WSL> wsl --import Alpine1 C:\WSL\Alpine1  C:\WSL\Alpine1\rootfs.tar.gz
+PS C:\WSL> wsl -l
+Windows Subsystem for Linux Distributions:
+Ubuntu-20.04 (Default)
+Alpine1
+PS C:\WSL> wsl --import Alpine1 C:\WSL\Alpine2  C:\WSL\Alpine2\rootfs.tar.gz
+A distribution with the supplied name already exists.
+PS C:\WSL> wsl --import Alpine2 C:\WSL\Alpine2  C:\WSL\Alpine2\rootfs.tar.gz
+PS C:\WSL> wsl -l
+Windows Subsystem for Linux Distributions:
+Ubuntu-20.04 (Default)
+Alpine2
+Alpine1
+
+PS C:\WSL> wsl --import Centos8 C:\WSL\CentOS8\  C:\WSL\CentOS8\rootfs.tar.gz
+PS C:\WSL> wsl --import UbuntuZer1 C:\WSL\UbuntuZerCode\  C:\WSL\ubuntu-plucky-oci-amd64-root.tar.gz
+PS C:\WSL> wsl -l
+Windows Subsystem for Linux Distributions:
+Ubuntu-20.04 (Default)
+Alpine2
+Alpine1
+Centos8
+UbuntuZer1
+PS C:\WSL>
+
+##################################################################################################################################
+
+
+wsl --export Ubuntu-22.04 ./ubuntu-22.04.tar
+wsl --export Ubuntu-20.04  C:\WSL\WslZercodeDistros\ubuntu2004zsh0.tar      # 3.4 GB totally
+wsl --import Ubuntu-Copy E:\WSLs\Ubuntu-Copy ./ubuntu-22.04.tar
+
+***-* Samples
+PS C:\Users\Administrator> wsl --export Alpine2  E:\WslZercode\Alpine_Zsh_Devops.tar  # 419 Mb totally
+
+Dışarı aktarma devam ediyor, bu işlem birkaç dakika sürebilir.
+The operation completed successfully.
+
+
+*-*-*-*-*
+wsl --import CentOS E:\WSLs\CentOS C:\Path\to\centos-rootfs.tar.gz
+adduser yourusername
+passwd yourusername
+wsl -d CentOS config --default-user yourusername
+
+***-*-*-
+curl -o alpine-rootfs.tar.gz https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-3.18.4-x86_64.tar.gz
+wsl --import Alpine E:\WSLs\Alpine C:\Path\to\alpine-rootfs.tar.gz
+adduser yourusername
+passwd yourusername
+wsl -d Alpine config --default-user yourusername
+
+
+##################################################################################################################################
+wsl --list --verbose
+
+wsl --terminate Ubuntu   # to stop dıstro
+
+wsl --unregister Ubuntu  # to delete dıstro
+
+
+   # Manuel Cleaning (Optional): 
+      %LOCALAPPDATA%\Packages
+      %USERPROFILE%\AppData\Local\Microsoft\WindowsApps
+
+
+
+##################################################################################################################################
+
+
+
+

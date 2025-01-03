@@ -1,0 +1,157 @@
+#### Import any Linux distribution to use with WSL  ##### https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
+
+
+
+#############################################################################################################################
+## Export the tar from a container  ##
+
+docker run -t --name wsl_export centos ls /
+
+docker export wsl_export > /mnt/c/temp/centos.tar
+
+docker rm wsl_export
+
+
+
+
+
+
+############################################################################################################################
+## Import the tar file into WSL // Importing CentOS example
+
+
+cd C:\temp
+mkdir E:\wslDistroStorage\CentOS
+
+wsl --import CentOS E:\wslDistroStorage\CentOS .\centos.tar
+
+wsl -l -v              # to check which distributions you have installed.
+
+
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+apk update         # Paket veritabanını günceller
+apk upgrade        # Yüklü paketleri günceller
+
+apk add ansible
+apk add terraform
+
+apk search <packagename>
+
+apk add curl bash
+apk cache clean
+
+apk del curl
+
+apk add coreutils    # Coloured Ls command
+     alias ls='ls --color=auto'
+  
+  # Bunu daimi yapmak için ~/.bashrc dosyasına ekleyin:
+echo "alias ls='ls --color=auto'" >> ~/.bashrc  
+source ~/.bashrc
+
+apk search <paket_adı>	Belirli bir paketi arar
+apk info <paket_adı>	Paket hakkında bilgi verir
+apk list --installed	Yüklü paketlerin listesini gösterir
+apk cache clean	Önbelleği temizler
+apk policy <paket_adı>	Bir paketin hangi sürümünün kurulu olduğunu gösterir
+
+
+
+.vimrc    ~/.vimrc   /etc/vim/vimrc
+
+    syntax on
+    set background=dark
+
+
+
+
+
+
+
+############################################################################################################################
+## AlpineWSL
+
+https://github.com/yuk7/AlpineWSL
+https://github.com/yuk7/AlpineWSL/releases/tag   / Alphine.zip   # download it
+
+1. Download installer zip
+2. Extract all files in zip file to same directory
+3.Run Alpine.exe to Extract rootfs and Register to WSL
+                Exe filename is using to the instance name to register. 
+                If you rename it, you can register with a different name and have multiple installs.
+
+
+>Alpine.exe clean
+
+wsl --import --vhd Alpine0 E:\Alpine\ .\ext4.vhdx
+
+
+
+############################################################################################################################
+
+
+FROM alpine:3.14
+RUN apk add --no-cache mysql-client
+ENTRYPOINT ["mysql"]
+              # virtual image size of only 36.8MB. 
+
+FROM ubuntu:20.04
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends mysql-client \
+    && rm -rf /var/lib/apt/lists/*
+ENTRYPOINT ["mysql"]
+              # a virtual image size of about 145MB image.
+
+
+
+
+############################################################################################################################
+## Manually installing WSL2 distributions  ## https://dev.to/milolav/manually-installing-wsl2-distributions-41b4
+
+PS E:\Temp> wsl --list --all -v
+  NAME            STATE           VERSION
+* Ubuntu-20.04    Stopped         2
+
+PS E:\Temp> wsl --export Ubuntu-20.04 E:\WSL2\ubuntu.tar
+
+PS E:\Temp> wsl --import Ubuntu-Copy E:\WSL2\Ubuntu-Copy E:\WSL2\ubuntu.tar
+
+PS E:\Temp> wsl --list --all -v
+  NAME            STATE           VERSION
+* Ubuntu-20.04    Stopped         2
+  Ubuntu-Copy     Stopped         2
+
+PS E:\Temp> wsl -d Ubuntu-Copy
+root@PC123:/mnt/e/Temp#
+
+https://alpinelinux.org/downloads/  
+
+PS E:\Temp> wsl --import Alpine-3.12 E:\WSL2\Alpine-3.12 E:\WSL2\alpine-minirootfs-3.12.0-x86_64.tar.gz
+
+PS E:\Temp> wsl -d Alpine-3.12 /usr/sbin/adduser -g '' -D user1
+Changing password for user1
+New password:
+Retype password:
+passwd: password for user1 changed by root
+
+PS E:\Temp> wsl -d Alpine-3.12 -u user1
+PC123:/mnt/e/Temp$
+
+
+
+
+
+
+
+
+############################################################################################################################
+
+
+
+
+
+
+############################################################################################################################
+
+

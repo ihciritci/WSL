@@ -1,0 +1,12 @@
+## Start /Stop
+
+
+
+net stop LxssManager
+net start LxssManager,
+
+
+## Reinstall WSL Distro
+ 
+wsl --unregister <Dağıtım Adı>
+wsl --install -d <Dağıtım Adı>

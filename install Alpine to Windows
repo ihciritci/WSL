@@ -1,0 +1,35 @@
+
+#### installing Alpine Linux to WSL ####
+
+Import-Module Wsl-Alpine
+
+Get-Command -Module Wsl-Alpine   #  commands on it
+
+              Install-WslAlpine
+              Remove-WslAlpine
+              Update-WslAlpine
+
+wsl -d MyAlpine
+
+
+Update-WslAlpine -Name MyAlpine
+
+Remove-WslAlpine -Name MyAlpine
+
+
+*-*-*-*-
+
+Install-WslAlpine
+
+Install-WslAlpine -DistributionName MyAlpine -InstallLocation "E:\WSLs\MyAlpine"
+
+
+
+wsl --import MyAlpine E:\WSLs\MyAlpine rootfs.tar.gz   # manuel import
+
+
+
+
+
+
+################################################
