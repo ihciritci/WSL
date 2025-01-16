@@ -9,3 +9,9 @@ wsl --set-default-version 1
 
 wsl --install
 
+
+
+########################### run Docker on AWS Workspace
+start /b dockerd.exe   # not run
+
+Start-Process -FilePath "C:\path\to\dockerd.exe" -WindowStyle Hidden 
