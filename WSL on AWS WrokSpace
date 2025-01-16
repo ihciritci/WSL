@@ -1,0 +1,11 @@
+
+wsl --install --enable-wsl1 --no-launch
+
+
+shutdown -r -t 20
+
+
+wsl --set-default-version 1
+
+wsl --install
+
